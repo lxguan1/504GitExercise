@@ -1,16 +1,38 @@
-def function1(a):
-    b = dict()
-    for c in a:
-        if c not in b:
-            b[c] = 1
+def count_nucleotides(dna_sequence):
+    """Count the occurrences of each nucleotide in a DNA sequence.
+    
+    Parameters:
+        dna_sequence: A string containing DNA nucleotides
+    Returns:
+        dict: A dictionary with nucleotides as keys and their counts as values
+    """
+    nucleotide_counts = dict()
+    
+    # Count each nucleotide in the DNA sequence
+    for nucleotide in dna_sequence:
+        if nucleotide not in nucleotide_counts:
+            nucleotide_counts[nucleotide] = 1
         else:
-            b[c] += 1
-    return b
+            nucleotide_counts[nucleotide] += 1
+            
+    return nucleotide_counts
 
-def function2(a):
-    print('freqs')
-    total = float(sum([a[b] for b in a.keys()]))
-    for b in a.keys():
-        print(b + ':' + str(a[b]/total))
+def display_nucleotide_freqs(nucleotide_counts):
+    """Display the frequency of each nucleotide as a proportion of the total.
+    
+    Parameters:
+        nucleotide_counts: Dictionary with nucleotides and their counts
+    """
+    
+    # Calculate the total number of nucleotides
+    total_nucleotides = float(sum(nucleotide_counts.values()))
+    
+    # Calculate and display the frequency of each nucleotide
+    print('Nucleotide Frequencies:')
+    for nucleotide in nucleotide_counts:
+        frequency = nucleotide_counts[nucleotide] / total_nucleotides
+        print(f'{nucleotide}: {frequency}')
 
-function2(function1('ATCTGACGCGCGCCGC'))
+dna_sequence = 'ATCTGACGCGCGCCGC'
+nucleotide_counts = count_nucleotides(dna_sequence)
+display_nucleotide_freqs(nucleotide_counts)
